@@ -1,0 +1,7 @@
+/venv
+/__pycache__
+/dataset
+.DS_Store
+.env
+/data
+.env.local

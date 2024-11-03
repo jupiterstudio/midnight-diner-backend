@@ -1,0 +1,32 @@
+graph TD
+    subgraph Frontend
+        F1(User Input)
+        F2(Display Responses)
+    end
+    
+    subgraph Backend
+        B1(REST API Endpoint)
+        B2(Auth0 API Call)
+        B3(LangChain + Claude + RAG)
+        B4(Chat History Handler)
+    end
+    
+    subgraph External Services
+        E1(Auth0)
+        E3(MongoDB)
+    end
+    
+
+    F1 --> |Register/Login Workflow| B1
+    B1 --> |Register| B2 --> E1
+    B1 --> |Login| B2 --> E1
+
+    
+    F1 --> |Chat Request| B1
+    B1 --> |New User| B3 --> B4
+    B1 --> |Existing User| B3 --> B4 --> E3
+    
+    B3 --> |Handle Chat Message| B4
+    B4 --> |Persist History| E3
+    B3 --> |Generate Response| F2
+

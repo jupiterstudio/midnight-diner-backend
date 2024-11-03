@@ -1,0 +1,23 @@
+graph TD
+    subgraph RAG Process
+        A1(User Query) --> B1(Retrieve Relevant Documents)
+        B1 --> |Query Vector DB| B2(Access Vector DB)
+        B2 --> |Return Relevant Data| B3(Combine Retrieved Data with Input)
+        B3 --> C1(Generate Response with Model)
+        C1 --> A2(Response to User)
+    end
+    
+    subgraph Vector Database
+        V1(Qdrant)
+    end
+
+    subgraph Model
+        M1(Claude)
+    end
+
+    A1 --> B1
+    B1 --> B2
+    B2 --> V1
+    B3 --> M1
+    M1 --> C1
+    A2
